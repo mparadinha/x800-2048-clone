@@ -1,4 +1,4 @@
-# x800-2048-clone
+## x800-2048-clone
 
 a clone of the 2048 game
 needs python 3.3 and pygame installed
