@@ -1,10 +1,10 @@
-## x800 - A clone of 2048
+# x800 - A clone of 2048
 
 Needs:
 - python 3.x
 - pygame
 
-### Files
+## Files
 - `2048.py` starts actual game
 
 - `gui.py` opens a visual app to choose, edit or create tilesets and profiles
