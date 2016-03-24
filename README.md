@@ -1,6 +1,8 @@
 ## x800 - A clone of 2048
 
-needs python 3.3+ and pygame installed
+Needs:
+- python 3.x
+- pygame
 
 - `2048.py` starts actual game
 
