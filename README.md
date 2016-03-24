@@ -4,6 +4,7 @@ Needs:
 - python 3.x
 - pygame
 
+### Files
 - `2048.py` starts actual game
 
 - `gui.py` opens a visual app to choose, edit or create tilesets and profiles
