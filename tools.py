@@ -18,16 +18,17 @@ def setup():
     ensure_default_package()
 
     ensure_default_profile()
-    
+
 def ensure_default_package():
     """Checks if the default image folder exists, and if it is usable.
     Creates a new one if it is missing"""
-    
-    pkg_path = os.path.join(os.getcwd(), "packages", "default")
-    
-    if not os.path.isdir(pkg_path):
 
-        # create new directory for default package
+    pkg_folder = os.path.join(os.getcwd(), "packages")
+    pkg_path = os.path.join(pkg_folder, "default")
+
+    if not os.path.isdir(pkg_folder):
+        os.mkdir(pkg_folder) # create packages folder
+    if not os.path.isdir(pkg_path):
         os.mkdir(pkg_path)
 
     # get the missing tiles if directory exists and is incomplete
@@ -87,7 +88,7 @@ def save_profile(data, profile_name):
     with open("{}.txt".format(profile_path), "w") as pf:
         for k in sorted(data.keys()):
             pf.write("{}={}\n".format(k, repr(data[k])))
-        
+
 def load_profile(profile_name="default"):
     """Returns a dictionary representing the profile save at 'profiles//profile_name.txt'"""
 
@@ -101,10 +102,10 @@ def load_profile(profile_name="default"):
 
     else:
         df = {}
-    
+
     # get a dictionary from the pairs in the file
     pf = dict([tuple(line.split("=")) for line in data])
-    
+
     # set each setting to its correct type
     pf = {key: eval(value) for key, value in list(pf.items())}
 
@@ -115,7 +116,7 @@ def load_profile(profile_name="default"):
 
         # if they are the wrong type, e.g should be tuple and is integer, use default instead
         elif type(df[k]) != type(pf[k]): pf[k] = df[k]
-    
+
     return pf
 
 def load_package(package_name="default"):
@@ -167,7 +168,7 @@ def preview(profile):
     board = pygame.Surface((110, 110))
     board.fill(profile["board_color"])
 
-    # get 0 tile surface for blitting 
+    # get 0 tile surface for blitting
     tile = load_package(package_name=profile["tile_set_name"])[0]
 
     # get text surface
@@ -176,7 +177,7 @@ def preview(profile):
     while True:
 
         screen.fill(profile["bg_color"])
-        
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -194,7 +195,7 @@ def preview(profile):
         # update screen and clock
         pygame.display.flip()
         fpsClock.tick(60)
-        
+
 if __name__ == "__main__":
     # if module is run on it's own, do the setup checks
     setup()
